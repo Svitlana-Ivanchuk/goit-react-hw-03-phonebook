@@ -6,6 +6,8 @@ import { Layout } from './Layuot';
 import { Section } from './Section/Section';
 import { FilterName } from './Filter/Filter';
 
+const localStorageKey = 'contacts';
+
 export class App extends Component {
   state = {
     contacts: [
@@ -18,6 +20,24 @@ export class App extends Component {
     number: '',
     filter: '',
   };
+
+  componentDidMount() {
+    const savedContacts = localStorage.getItem(localStorageKey);
+    if (savedContacts !== null) {
+      this.setState({
+        contacts: JSON.parse(savedContacts),
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem(
+        localStorageKey,
+        JSON.stringify(this.state.contacts)
+      );
+    }
+  }
 
   filterByName = valueName => {
     this.setState(() => {
