@@ -1,4 +1,5 @@
 import { StyledBtnDelete, StyledContact, StyledList } from './Contacts.styled';
+import { TiUserDelete } from 'react-icons/ti';
 
 export const Contacts = ({ contacts, onDeleteContact }) => {
   return (
@@ -8,7 +9,7 @@ export const Contacts = ({ contacts, onDeleteContact }) => {
           <StyledContact key={contact.id}>
             {contact.name} : {contact.number}
             <StyledBtnDelete onClick={() => onDeleteContact(contact.id)}>
-              Delete
+              <TiUserDelete></TiUserDelete>
             </StyledBtnDelete>
           </StyledContact>
         ))}
